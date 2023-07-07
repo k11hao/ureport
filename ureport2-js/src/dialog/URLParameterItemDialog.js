@@ -37,12 +37,33 @@ export default class URLParameterItemDialog{
         const saveButton=$(`<button type="button" class="btn btn-primary">${window.i18n.dialog.paramItem.save}</button>`);
         footer.append(saveButton);
         const _this=this;
+
+        function illegalWords(str) {
+            var keywords = ['alert', 'prompt', 'confirm', 'document', 'window.location','onerror' ,'onclick', '<', '>', '"', "'", '\\', '/'];
+
+            for (var i = 0; i < keywords.length; i++) {
+                if (str.includes(keywords[i])) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         saveButton.click(function(){
             const name=_this.nameEditor.val(),value=_this.valueEditor.val();
+
             if(name==='' || value===''){
                 alert(`${window.i18n.dialog.paramItem.tip}`);
                 return;
             }
+
+            if(illegalWords(name) || illegalWords(value)){
+                alert(`${window.i18n.dialog.paramItem.illegal_character}`);
+                return;
+            }
+
+
             _this.paramItem.name=name;
             _this.paramItem.value=value;
             _this.callback.call(this);

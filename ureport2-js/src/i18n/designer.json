@@ -502,7 +502,8 @@
       "save":"保存",
       "tip":"参数项请输入完整！",
       "add":"添加参数",
-      "edit":"编辑参数"
+      "edit":"编辑参数",
+      "illegal_character":"非法字符"
     }
   },
   "property":{

@@ -131,6 +131,13 @@ public class DesignerServletAction extends RenderPageServletAction {
 		if(file==null){
 			throw new ReportDesignException("Report file can not be null.");
 		}
+		if(file.startsWith("http")){
+			throw new ReportDesignException("非法路径");
+		}
+		if(file.startsWith("/")){
+			throw new ReportDesignException("非法路径");
+		}
+
 		file=ReportUtils.decodeFileName(file);
 		Object obj=TempObjectCache.getObject(file);
 		if(obj!=null && obj instanceof ReportDefinition){
